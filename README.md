@@ -27,3 +27,8 @@ Lint:
 
 Clear cache of lint:
 * yarn clear:jest
+
+
+![auto_complete_1](https://user-images.githubusercontent.com/8124862/229590059-12b5b63c-4a65-499f-afa3-c23a4e7b2c05.png)
+![auto_complete_2](https://user-images.githubusercontent.com/8124862/229590078-af074702-e4ae-4049-9749-9c5b4dc88039.png)
+![auto_complete_3](https://user-images.githubusercontent.com/8124862/229590090-528ec936-bca3-448e-a2be-70ceca9ebed2.png)
