@@ -3,8 +3,10 @@ import * as React from 'react'
 interface IAppContext {
   setUserListContext: Function,
   setUserListCopy: Function,
+  setUserCountries: Function,
   userListCopy: Array<any>,
   userList:  Array<any>,
+  userCountries:  Array<any>,
 }
 
 type Props = {
@@ -19,6 +21,7 @@ const AppContextProvider = ({ children }: Props) => {
   // Is used to control the states
   const [userList, setUserList] = React.useState<Array<any>>([])
   const [userListCopy, setUserListCopy] = React.useState<Array<any>>([])
+  const [userCountries, setUserCountries] = React.useState<Array<any>>([])
 
   const setUserListContext = (value: Array<any>): void => {
     setUserList(value)
@@ -28,14 +31,18 @@ const AppContextProvider = ({ children }: Props) => {
     () => ({
       setUserListContext,
       setUserListCopy,
+      setUserCountries,
       userListCopy,
       userList,
+      userCountries,
     }),
     [
       setUserListContext,
       setUserListCopy,
+      setUserCountries,
       userListCopy,
       userList,
+      userCountries,
     ]
   )
   
