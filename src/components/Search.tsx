@@ -27,7 +27,6 @@ const Search = () => {
         const inputValue = e.target.value
         if (inputValue.length > 0) {
             const data = userCountries.filter((item: string) => {
-            // const data = countriesValue.filter((item: string) => {
                 // Using the name and the country fields for searching
                 return item.toLowerCase().startsWith(inputValue.toLowerCase()
                 )
@@ -86,7 +85,7 @@ const Search = () => {
             />
             <img className='findIcon' src={mainIcons.iconSearch} alt='Edit user' />
             { countrySelect && (
-                <div className='searchContentCountry' style={{overflowY:'scroll', height:'250px'}}>
+                <div className='searchContentCountry'>
                     {
                         countries.map((country) => (
                             <p key={country} className='countryField' onClick={handleCountry}>{country}</p>
