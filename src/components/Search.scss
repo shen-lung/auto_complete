@@ -23,10 +23,13 @@
     height: 24px;
 }
 
-.searchContentCountry {
+div.searchContentCountry {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     border: 1px solid $card-header-color;
-    width: 313px;
+    width: 312px;
+    height: 150px;
+    overflow-x: hidden;
+    overflow-y: auto;
     background-color: $white;
     position: absolute;
     top: 108%;
