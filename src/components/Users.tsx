@@ -5,11 +5,24 @@ import Card from './Card'
 import { getAllUsers } from '../api/getUsers'
 import './Users.scss'
 
+type user = {
+    userId: string;
+    name: string;
+    picture: string;
+    email: string;
+    phone: string;
+    city: string;
+    state: string;
+    country: string;
+    location: string;
+}
+
 const Users = () => {
     // Users is the section where we show all user information like card
     const {
         setUserListContext,
         setUserListCopy,
+        setUserCountries,
         userList,
     } = React.useContext(AppContext)
 
@@ -20,6 +33,15 @@ const Users = () => {
         // We store the information if the response status is ok 
         if(allAsersResponse.status) {
             const data: any = allAsersResponse.data
+            const countries: Array<string> = []
+
+            data.forEach((item: user) => {
+                if (!countries.includes(item.country)) {
+                    countries.push(item.country)
+                }
+            })
+
+            setUserCountries(countries)
             setUserListContext(data)
             setUserListCopy([...data])
         } else {

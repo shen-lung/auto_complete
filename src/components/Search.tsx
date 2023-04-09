@@ -11,44 +11,65 @@ type Item = {
 
 const Search = () => {
     // Search element is to find the typed text in the user list
-    // You can search by Name or by Country
-    
-    const defaultValue = 'Search by name or country ...'
-    const [value, setValue] = React.useState(defaultValue)
+    // You can search by Country
     const {
         setUserListContext,
-        userList,
         userListCopy,
+        userCountries,
     } = React.useContext(AppContext)
-
+    
+    const defaultValue = 'Search by country ...'
+    const [value, setValue] = React.useState(defaultValue)
+    const [countrySelect, setCountrySelect] = React.useState(false)
+    const [countries, setCountries] = React.useState<Array<string>>([])
     // Handle the input text
     const handleOnChange = async (e: { target: HTMLInputElement; }) => {
-        const inputValue = e.target.value.toLowerCase()
-
-        // Wait until to has at least the three caracters to start to search 
-        if (inputValue.length > 1) {
-            const data = userList.filter((item: Item) => {
-                const name = item.name.toLowerCase()
-                const country = item.country.toLowerCase()
+        const inputValue = e.target.value
+        if (inputValue.length > 0) {
+            const data = userCountries.filter((item: string) => {
+            // const data = countriesValue.filter((item: string) => {
                 // Using the name and the country fields for searching
-                return name.indexOf(inputValue) !== -1 || country.indexOf(inputValue) !== -1
+                return item.toLowerCase().startsWith(inputValue.toLowerCase()
+                )
             })
 
-            setUserListContext(data)
+            setCountrySelect(true)
+            setCountries(data)
         } else {
             setUserListContext(userListCopy)
         }
-
         setValue(inputValue)
     }
     
     const handleOnFocus = () => {
-        setValue('')
+        if(value === defaultValue) {
+            setValue('')
+            setUserListContext(userListCopy)
+            setCountrySelect(false)
+        }
     }
     // Restore the list on focus out
     const handleOnBlur = () => {
-        setUserListContext(userListCopy)
-        setValue(defaultValue)
+        if(value === '') {
+            setValue(defaultValue)
+            setUserListContext(userListCopy)
+            setCountrySelect(false)
+        }
+    }
+
+    const handleCountry = (e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
+        // @ts-ignore
+        const countryValue = e.target.innerHTML
+
+        setValue(countryValue)
+        setCountrySelect(false)
+
+        const data = userListCopy.filter((item: Item) => {
+            // Using the name and the country fields for searching
+            return item.country.toLowerCase().startsWith(countryValue.toLowerCase())
+        })
+
+        setUserListContext(data)
     }
 
     return (
@@ -64,6 +85,15 @@ const Search = () => {
                 onBlur={handleOnBlur}
             />
             <img className='findIcon' src={mainIcons.iconSearch} alt='Edit user' />
+            { countrySelect && (
+                <div className='searchContentCountry' style={{overflowY:'scroll', height:'250px'}}>
+                    {
+                        countries.map((country) => (
+                            <p key={country} className='countryField' onClick={handleCountry}>{country}</p>
+                        ))
+                    }
+                </div>
+            )}
         </div>
     )
 }

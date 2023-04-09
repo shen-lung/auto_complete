@@ -22,3 +22,27 @@
     width: 24px;
     height: 24px;
 }
+
+.searchContentCountry {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: 1px solid $card-header-color;
+    width: 313px;
+    background-color: $white;
+    position: absolute;
+    top: 108%;
+    border-radius: 5px;
+}
+
+.countryField {
+    background-color: $country-background-color;
+    padding: 7px 0;
+    padding-left: 9px;
+    margin: 0;
+    margin-bottom: 1px;
+    font-size: 18px;
+}
+
+.countryField:hover {
+    background-color: $button-hover-color;
+    cursor: pointer;
+}
